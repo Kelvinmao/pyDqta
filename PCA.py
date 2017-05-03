@@ -23,9 +23,10 @@ def eigenValue(covMat):
     return eigVal,eigMat
 
 def savePricinpal(eigVal,eigMat,covMat,newDataMat,dim,meanVal):
-    eigValSorted=sort(eigVal)
-    eigValNMax=eigValSorted[:-(dim+1):-1]
-    eigMatN=eigMat[:dim]
+    eigValSorted=argsort(eigVal)
+    eigValNMax=eigValSorted[-1:-(dim+1):-1]
+    print  eigValNMax
+    eigMatN=eigMat[:,eigValNMax]
     lowDataMat=newDataMat*eigMatN
     recordMat=(lowDataMat*eigMatN.T)+meanVal
     return recordMat,lowDataMat
@@ -35,4 +36,4 @@ if __name__ == '__main__':
     newdatamat,meanval=zeroMean(mata)
     conv=computeCovMat(newdatamat)
     eigval,eigmat=eigenValue(conv)
-    savePricinpal(eigval,eigmat,conv,newdatamat,2,meanval)
+    savePricinpal(eigval,eigmat,conv,newdatamat,999999,meanval)
